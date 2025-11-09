@@ -13,6 +13,8 @@ public class EnemyAI : MonoBehaviour
     public float obstacleCheckDistance = 1f;
     public Rigidbody2D rb;
 
+    [Range(0.1f, 20f)] public float rotationSpeed = 10f;
+
     private Transform player;
     private UnityEngine.Vector2 movementDirection;
     
@@ -77,6 +79,16 @@ public class EnemyAI : MonoBehaviour
         // Move using Rigidbody2D
         UnityEngine.Vector2 newPos = (UnityEngine.Vector2)transform.position + movementDirection * speed * Time.fixedDeltaTime;
         rb.MovePosition(newPos);
+
+
+     if (player != null)
+    {
+        UnityEngine.Vector2 directionToPlayer = (player.position - transform.position).normalized;
+        float angle = Mathf.Atan2(directionToPlayer.y, directionToPlayer.x) * Mathf.Rad2Deg;
+        UnityEngine.Quaternion targetRotation = UnityEngine.Quaternion.AngleAxis(angle, UnityEngine.Vector3.forward);
+        transform.rotation = UnityEngine.Quaternion.Lerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+    }
+        
     }
 
   
