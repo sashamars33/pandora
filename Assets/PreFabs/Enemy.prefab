@@ -104,7 +104,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8582c15378d34364b9d167b697fde2f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3.8
+  speed: 4.3
   playerChaseRadius: 8
   torchAttractionRadius: 2
   obstacleCheckDistance: 1
