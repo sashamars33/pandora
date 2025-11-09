@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class RestartOnCollison : MonoBehaviour
 {
+    public GameOverScreen gameOverUI;
 void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Enemy"))
@@ -15,7 +16,12 @@ void OnCollisionEnter2D(Collision2D collision)
 
     void RestartLevel()
     {
-        // Reloads the current scene
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+         if (gameOverUI != null)
+        {
+            gameOverUI.ShowGameOverScreen();
+        } else
+        {
+            Debug.LogWarning("No GameOverUIManager assigned!");
+        }
     }
 }
