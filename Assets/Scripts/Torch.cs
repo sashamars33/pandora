@@ -1,8 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.PackageManager;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Torch : MonoBehaviour, Torches
 {
@@ -12,17 +12,20 @@ public class Torch : MonoBehaviour, Torches
     public string torchID;
     public GameObject torchMask;
 
-    private SpriteRenderer spriteRenderer;
+    [SerializeField] private SpriteRenderer spriteRenderer;
+
+    [SerializeField] private Animator animator;
  
 
 
     void Awake()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        //spriteRenderer = GetComponent<SpriteRenderer>();
 
 
         // Load the persisted state
         illuminated = PlayerPrefs.GetInt(torchID, 0) == 1;
+
         UpdateVisuals();
         // Ensure mask starts inactive
     }
@@ -34,6 +37,7 @@ public class Torch : MonoBehaviour, Torches
         if (!illuminated)
         {
             illuminated = true;
+        
             UpdateVisuals();
 
             
@@ -47,10 +51,10 @@ public class Torch : MonoBehaviour, Torches
             Debug.Log($"Torch {torchID} Lit");
         }
     }
-    
-      private void UpdateVisuals()
-    {
 
+    private void UpdateVisuals()
+    {
+        animator.SetBool("IsIlluminated", illuminated);
         if (spriteRenderer != null)
         {
             spriteRenderer.color = illuminated ? litColor : unlitColor;
@@ -61,6 +65,37 @@ public class Torch : MonoBehaviour, Torches
         {
             torchMask.SetActive(illuminated);
         }
+
+    }
+
+
+    private void PerformIlluminate()
+    {
+        StartCoroutine(CoIlluminate());
+    }
+
+    // Coroutine to tween color
+    private IEnumerator CoIlluminate()
+    {
+
+        float timer = 0f;
+        float duration = 1f;
+        while (timer < duration)
+        {
+            timer += Time.deltaTime;
+
+            // Do a lerp. Can be any type of value change.
+
+            spriteRenderer.color = Color.Lerp(unlitColor, litColor, timer / duration);
+
+            yield return null;
+        }
+
+
+        // ...
+        //yield return new WaitForSeconds(1f);
+
+        //...
 
     }
 

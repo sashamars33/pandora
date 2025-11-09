@@ -79,12 +79,5 @@ public class EnemyAI : MonoBehaviour
         rb.MovePosition(newPos);
     }
 
-    void OnDrawGizmosSelected()
-    {
-        // Visualize the detection radii
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, playerChaseRadius);
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, torchAttractionRadius);
-    }
+  
 }
