@@ -29,8 +29,8 @@ RectTransform:
   m_GameObject: {fileID: 3233242472681733195}
   m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: -3}
-  m_LocalScale: {x: 1.006, y: 1.006, z: 2.012}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2127541299034165129}
   m_Father: {fileID: 0}
@@ -106,7 +106,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 4.3
   playerChaseRadius: 8
-  torchAttractionRadius: 2
+  torchAttractionRadius: 3
   obstacleCheckDistance: 1
   rb: {fileID: -9129705594382189624}
 --- !u!50 &-9129705594382189624
@@ -197,14 +197,14 @@ RectTransform:
   m_GameObject: {fileID: 3757775611865551196}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.059626665, y: 0.059626665, z: 0.059626665}
+  m_LocalScale: {x: 0.15565339, y: 0.15565339, z: 0.15565339}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4807362428720365281}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.1, y: 0}
+  m_AnchoredPosition: {x: 0.45, y: 0}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!212 &806035937383049442
