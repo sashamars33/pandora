@@ -49,3 +49,9 @@ TagManager:
   - name: Overlay
     uniqueID: 2459915659
     locked: 0
+  - name: Players
+    uniqueID: 3497082395
+    locked: 0
+  - name: Walls
+    uniqueID: 863446115
+    locked: 0
