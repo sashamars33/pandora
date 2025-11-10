@@ -183,9 +183,10 @@ GameObject:
   - component: {fileID: 2127541299034165129}
   - component: {fileID: 806035937383049442}
   - component: {fileID: 7352232479705132065}
+  - component: {fileID: 1184469990853269026}
   m_Layer: 0
   m_Name: MothSprite
-  m_TagString: Untagged
+  m_TagString: EnemySprite
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -282,3 +283,17 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1184469990853269026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3757775611865551196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 045aa426db5d751429ad028c8948c793, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 0}
+  mothDeath: 0

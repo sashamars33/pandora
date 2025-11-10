@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class EnemyAI : MonoBehaviour
@@ -12,9 +13,9 @@ public class EnemyAI : MonoBehaviour
     public float torchAttractionRadius = 6f;    // How close the torch must be for the enemy to care
     public float obstacleCheckDistance = 1f;
     public Rigidbody2D rb;
-
+    
     [Range(0.1f, 20f)] public float rotationSpeed = 10f;
-
+    
     private Transform player;
     private UnityEngine.Vector2 movementDirection;
     
@@ -22,7 +23,8 @@ public class EnemyAI : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+    animator = GetComponentInChildren<Animator>(); // ✅ find Animator on child
+    player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     void FixedUpdate()
@@ -54,6 +56,7 @@ public class EnemyAI : MonoBehaviour
         // 3️⃣ Prioritize lit torch if one is nearby; else chase player if awake
         if (nearbyLitTorch != null)
             return nearbyLitTorch.transform;
+            
 
         if (playerIsClose)
             return player;
@@ -81,15 +84,34 @@ public class EnemyAI : MonoBehaviour
         rb.MovePosition(newPos);
 
 
-     if (player != null)
+        if (player != null)
+        {
+            UnityEngine.Vector2 directionToPlayer = (player.position - transform.position).normalized;
+            float angle = Mathf.Atan2(directionToPlayer.y, directionToPlayer.x) * Mathf.Rad2Deg;
+            UnityEngine.Quaternion targetRotation = UnityEngine.Quaternion.AngleAxis(angle, UnityEngine.Vector3.forward);
+            transform.rotation = UnityEngine.Quaternion.Lerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        }
+
+    }
+    
+    [SerializeField] private Animator animator;
+    public bool mothDeath;
+
+
+   void OnTriggerEnter2D(Collider2D other)
+{
+    Debug.Log("Trigger with: " + other.gameObject.name);
+    if (gameObject.CompareTag("Enemy"))
     {
-        UnityEngine.Vector2 directionToPlayer = (player.position - transform.position).normalized;
-        float angle = Mathf.Atan2(directionToPlayer.y, directionToPlayer.x) * Mathf.Rad2Deg;
-        UnityEngine.Quaternion targetRotation = UnityEngine.Quaternion.AngleAxis(angle, UnityEngine.Vector3.forward);
-        transform.rotation = UnityEngine.Quaternion.Lerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        Debug.Log("Trigger Torch");
+        mothDeath = true;
+        animator.SetBool("mothDeath", mothDeath);
+        Destroy(gameObject, 1f);
     }
-        
-    }
+}
+
+
+
 
   
 }
